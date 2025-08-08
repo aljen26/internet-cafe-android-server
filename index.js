@@ -8,8 +8,8 @@ app.use(express.static(__dirname + '/public'));
 //Stored In-memory
 const timerState = {
     1: { seconds: 60, paused: false },
-    2: { seconds: 60, paused: false },
-    3: { seconds: 60, paused: false }
+    2: { seconds: 90, paused: false },
+    3: { seconds: 3000, paused: false }
 };
 
 //Countdown loop
