@@ -22,8 +22,31 @@
     font-size: 1.2rem;
 }
 
+/* Timer display */
 .timer {
     font-family: monospace;
     font-size: 2rem;
     margin: 0.5rem 0 1rem;
 }
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.controls button {
+    flex: 1;
+    padding: 0.75rem;
+    margin: 0.25rem;
+    font-size: 1rem;
+    border: 1px sold #888;
+    border-radius: 4px;
+    background: #fafafa;
+    cursor: pointer;
+}
+
+.controls button:active {
+  background: #eee;
+}
+

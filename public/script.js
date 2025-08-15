@@ -32,6 +32,42 @@ function startPolling() {
     }, 1000);
 }
 
+// Handle button clicks
+async function handleButtonClick(e) {
+    const btn = e.target;
+    const pcId = btn.getAttribute('data-pc');
+    const action = btn.getAttribute('data-action');
+    const value = btn.getAttribute(data-value);
+
+    if(!pcId || !action) return;
+
+    let endpoint = '';
+    let payload = { pc: parseInt(pcId) };
+
+    if(action === 'add') {
+        endpoint = 'add';
+        payload.minutes = parseInt(value) * 5;
+    } else if(action === 'sub') {
+        endpoint = 'sub';
+        payload.minutes = parseInt(value) * 5;
+    }
+
+    try {
+        await fetch(`${SERVER}/${endpoint}`, {
+            method: 'POST';
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+
+        fetchStatus(pcId);
+    } catch (err) {
+        console.error(`Failed to send ${action} for PC${pcId}`, err);
+    }
+}
+
+
+
+
 // Setup
 function init() {
 
