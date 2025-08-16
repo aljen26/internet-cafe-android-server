@@ -66,9 +66,6 @@ async function handleButtonClick(e) {
     }
 }
 
-
-
-
 // Setup
 function init() {
 

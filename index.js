@@ -40,6 +40,26 @@ app.get('/status/:pc', (req, res) => {
     res.json({ seconds: timer.seconds, paused: timer.paused});
 });
 
+// Add time (in minutes)
+app.post('/add', (req, res) => {
+    const { pc, minutes } = req.body;
+    if(!timerState[pc]) return res.status(400).json({ error: "Invalid PC"});
+
+    timerState[pc].seconds += minutes * 60;
+    console.log(`🟢 Added ${minutes} minutes to PC${pc}`);
+    res.sendStatus(200);
+});
+
+// Subtract time (in minutes)
+app.post('/sub', (req, res) => {
+    const { pc, minutes } = req.body;
+    if (!timerState[pc]) return res.status(400).json({ error: 'Invalid PC' });
+
+    timerState[pc].seconds = Math.max(0, timerState[pc].seconds - minutes * 60);
+    console.log(`🔻 Subtracted ${minutes} minutes from PC${pc}`);
+    res.sendStatus(200);
+});
+
 
 app.listen(PORT, () => {
     console.log(`✅ Server running at: http://localhost:${PORT}`);
