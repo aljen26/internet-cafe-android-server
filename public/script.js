@@ -32,12 +32,13 @@ function startPolling() {
     }, 1000);
 }
 
+
 // Handle button clicks
 async function handleButtonClick(e) {
     const btn = e.target;
     const pcId = btn.getAttribute('data-pc');
     const action = btn.getAttribute('data-action');
-    const value = btn.getAttribute(data-value);
+    const value = btn.getAttribute('data-value');
 
     if(!pcId || !action) return;
 
@@ -54,7 +55,7 @@ async function handleButtonClick(e) {
 
     try {
         await fetch(`${SERVER}/${endpoint}`, {
-            method: 'POST';
+            method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(payload)
         });
@@ -70,6 +71,10 @@ async function handleButtonClick(e) {
 
 // Setup
 function init() {
+
+    document.querySelectorAll('button').forEach(btn=> {
+        btn.addEventListener('click', handleButtonClick);
+    });
 
     // Start polling every second
     startPolling();
